@@ -21,8 +21,13 @@ public class EmployeeService {
     }
 
     public String addEmployee(EmployeeEntity employee) {
+        // Generate a unique UUID as the ID for the Employee
         employee.setId(java.util.UUID.randomUUID().toString());
+
+        // Save the employee to the database
         EmployeeEntity savedEmployee = employeeRepository.save(employee);
+
+        // Return the ID of the added employee
         return savedEmployee.getId();
     }
 
@@ -61,7 +66,7 @@ public class EmployeeService {
 
     private EmployeeEntity getNthLevelManagerRecursive(EmployeeEntity employee, int level) {
         if (level == 0) {
-            return employee;
+            return employee; // Found the nth level manager
         }
 
         String reportsToId = employee.getReportsTo();
